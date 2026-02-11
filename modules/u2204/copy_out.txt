@@ -1,0 +1,13 @@
+Docker image ms-u2204-kernel-modules-source-image not found. Building the image...
+Sending build context to Docker daemon    289MB
+[91m[WARNING]: Empty continuation line found in: RUN cd /workspace/linux-5.15.0 &&     cd scripts &&     chmod +x pahole-version.sh pahole-flags.sh &&     cd .. &&     make ARCH=arm64 defconfig &&     ./scripts/config --disable CONFIG_SECURITY_SELINUX &&     ./scripts/config --disable CONFIG_SECURITY_SELINUX_BOOTPARAM &&     ./scripts/config --disable CONFIG_SECURITY_SELINUX_DEVELOP &&     ./scripts/config --disable CONFIG_SECURITY_SELINUX_AVC_STATS &&     ./scripts/config --enable CONFIG_DAX &&     ./scripts/config --module CONFIG_DEV_DAX &&     ./scripts/config --enable CONFIG_LIBNVDIMM &&     ./scripts/config --enable CONFIG_BLK_DEV_PMEM &&     ./scripts/config --enable CONFIG_NVDIMM_DAX &&     ./scripts/config --enable CONFIG_NVDIMM_PFN &&     ./scripts/config --enable CONFIG_NVDIMM_BTT &&     ./scripts/config --enable CONFIG_FS_DAX &&     ./scripts/config --enable CONFIG_FS_DAX_PMD &&     ./scripts/config --enable CONFIG_DAX_PMEM &&     ./scripts/config --enable CONFIG_DAX_DRIVER &&     ./scripts/config --module CONFIG_VIRTIO_PMEM &&     ./scripts/config --enable CONFIG_EXT4_FS &&     ./scripts/config --enable CONFIG_EXT4_FS_POSIX_ACL &&     ./scripts/config --enable CONFIG_XFS_FS &&     ./scripts/config --enable CONFIG_XFS_POSIX_ACL &&     ./scripts/config --enable CONFIG_EXT4_FS_DAX &&     ./scripts/config --enable CONFIG_XFS_DAX &&     make ARCH=arm64 olddefconfig &&     make ARCH=arm64 -j 8 &&     make INSTALL_MOD_PATH=/workspace/output modules_install
+[0m[91m[WARNING]: Empty continuation lines will become errors in a future release.
+[0mStep 1/11 : FROM ubuntu:22.04
+ ---> 2b7cc08dcdbb
+Step 2/11 : ARG KREL=5.15.0-25-generic
+ ---> Running in 550d3ce1088c
+ ---> Removed intermediate container 550d3ce1088c
+ ---> 7bcb20de026b
+Step 3/11 : RUN apt update && apt install -y     build-essential     libncurses-dev     bison     flex     libssl-dev     libelf-dev     libdw-dev     bc     wget     git     linux-headers-${KREL}     kmod     vim     curl     file     rsync     xz-utils     pkg-config     python3     perl     dwarves
+ ---> Running in 7987a679b18d
+Failed to build the Docker image.

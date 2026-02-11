@@ -190,14 +190,15 @@ Your choices for `workload` are listed below:
 
 * BT
 * CG
-* DC
+* DC (OMP only)
+* DT (MPI only)
 * EP
 * FT
 * IS
 * LU
 * MG
 * SP
-* UA
+* UA (OMP only)
 
 For your choices of `class` for each `workload` please refer to `NPB3.4-OMP/README.install`.
 

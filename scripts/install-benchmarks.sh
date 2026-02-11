@@ -8,6 +8,7 @@ cd $HOME
 cd workloads
 
 cd annotate/
+make clean
 make gem5fs
 cd ..
 
@@ -23,43 +24,40 @@ cd NPB3.4-MPI
 ./build_npb_gem5.sh
 cd ..
 
-cd branson
-mkdir build
-cd build
-cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_ANNOTATE_TYPE=gem5fs -DSYNC_ANNOTATE=true
+echo "building mmap_override"
+
+cd mmap_override
 make
-cd ..
 cd ..
 
-cd UME
-mkdir build
-cd build
-cmake ../ -DCMAKE_BUILD_TYPE=Release -DUSE_CATCH2=off -DUSE_MPI=true -DCMAKE_ANNOTATE_TYPE=gem5fs -DCMAKE_ROI_TYPE=sync
-make
-cd ..
-cd inputs
-cd blake
-./remake_partitioned_files.sh
-./delete_partitions.sh
-./extract_files.sh
-./delete_compressed_files.sh
-cd ..
-cd pipe_3d
-./remake_partitioned_files.sh
-./delete_partitions.sh
-./extract_files.sh
-./delete_compressed_files.sh
-cd ..
-cd ..
-mpirun -np 8 ./build/src/scale_mesh inputs/pipe_3d/pipe_3d/pipe_3d_00001 2
-mpirun -np 8 ./build/src/scale_mesh inputs/pipe_3d/pipe_3d/pipe_3d_00001 4
-mpirun -np 1 ./build/src/scale_mesh inputs/blake/blake/blake 128
-cd ..
+# cd branson
+# mkdir build
+# cd build
+# cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_ANNOTATE_TYPE=gem5fs
+# make
+# cd ../..
 
-cd hpcg
-./configure Linux_MPI_gem5fs_sync
-make
-cd ..
+# cd UME
+# mkdir build
+# cd build
+# cmake .. -DUSE_CATCH2=off -DUSE_MPI=true -DCMAKE_ANNOTATE_TYPE=gem5fs
+# make
+# cd ..
+# cd inputs
+# ./remake_partitioned_files.sh
+# tar -xJvf pipe_3d.tar.xz
+# rm pipe_3d.tar.xz
+# rm pipe_3d.tar.xz.part.000
+# rm pipe_3d.tar.xz.part.001
+# rm pipe_3d.tar.xz.part.002
+# mkdir blake
+# tar -xzvf ume1r.tar.gz -C blake
+# cd ../..
+
+# cd hpcg
+# ./configure Linux_MPI_gem5fs
+# make
+# cd ..
 
 cd simple-vector-bench
 

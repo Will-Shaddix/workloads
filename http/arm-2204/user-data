@@ -28,11 +28,19 @@ autoinstall:
     toggle: null
     variant: ''
   locale: en_US.UTF-8
+  # network:
+  #   ethernets:
+  #     enp0s3:
+  #       dhcp4: true
+  #   version: 2
   network:
-    ethernets:
-      enp0s3:
-        dhcp4: true
     version: 2
+    ethernets:
+      eth0:
+        match:
+          macaddress: "52:54:00:12:34:56"
+        set-name: eth0
+        dhcp4: true
   ssh:
     allow-pw: true
     authorized-keys: []

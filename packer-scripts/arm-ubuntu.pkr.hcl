@@ -65,6 +65,14 @@ locals {
     ["-device", "virtio-gpu-pci"],
     ["-device", "qemu-xhci"],
     ["-device", "usb-kbd"],
+
+    # ["-nographic"],
+    # ["-serial", "mon:stdio"],
+  ]
+
+  qemuargs_net = [
+    ["-netdev", "user,id=net0,hostfwd=tcp:127.0.0.1:{{ .SSHHostPort }}-:22"],
+    ["-device", "virtio-net-pci,netdev=net0,mac=52:54:00:12:34:56"]
   ]
 
   qemuargs_kvm = concat(local.qemuargs_base,[
@@ -76,13 +84,15 @@ locals {
     ["-cpu", "cortex-a57"]
   ])
 
-  qemuargs = var.use_kvm == "true" ? local.qemuargs_kvm : local.qemuargs_no_kvm
+  qemuargs_selected = var.use_kvm == "true" ? local.qemuargs_kvm : local.qemuargs_no_kvm
+  
+  qemuargs          = concat(local.qemuargs_selected, local.qemuargs_net)
 }
 
 source "qemu" "initialize" {
   boot_command     = [
                       "c<wait>",
-                      "linux /casper/vmlinuz autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ --- ",
+                      "linux /casper/vmlinuz autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ console=ttyAMA0 --- ",
                       "<enter><wait>",
                       "initrd /casper/initrd",
                       "<enter><wait>",
@@ -139,7 +149,8 @@ build {
 
   provisioner "file" {
     destination = "/home/gem5"
-    source      = "modules/u2204/files/5.15.167"
+    source      = "modules/u2204/files/5.15.193" 
+
   }
 
   provisioner "file" {
@@ -197,6 +208,11 @@ build {
   provisioner "file" {
     destination = "/home/gem5/workloads/"
     source      = "NPB3.4-MPI"
+  }
+
+  provisioner "file" {
+    destination = "/home/gem5/workloads/"
+    source      = "mmap_override"
   }
 
   provisioner "file" {

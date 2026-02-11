@@ -1,0 +1,1 @@
+scp -P 2222 ./mpi_test.c will@127.0.0.1:/home/will/mpi_files/mpi_files

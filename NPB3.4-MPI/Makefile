@@ -21,7 +21,7 @@ ifeq ($(PLATFORM), papi)
 else ifeq ($(PLATFORM), gem5)
 	ROI_BIN+=$(ROI_DIR)/lib/libannotate.gem5fs.so
 	ROI_INC+=-I$(ROI_DIR)/gem5/include
-	ROI_LIB+=-L$(ROI_DIR)/gem5/lib
+	ROI_LIB+=-L$(ROI_DIR)/gem5/lib/arm
 	ROI_OBJ+=-lm5
 else
 	ROI_BIN+=$(ROI_DIR)/lib/libannotate.native.so

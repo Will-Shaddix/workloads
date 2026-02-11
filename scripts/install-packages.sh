@@ -38,6 +38,6 @@ update-alternatives --install /usr/bin/cpp cpp /usr/bin/cpp-13 130
 update-alternatives --set cpp /usr/bin/cpp-13
 
 # Install desired packages
-sudo apt-get -y -o Dpkg::Options::="--force-confnew" install python3-pip gfortran cmake openmpi-bin libopenmpi-dev libpfm4 libpfm4-dev
+sudo apt-get -y -o Dpkg::Options::="--force-confnew" install python3-pip gfortran cmake openmpi-bin libopenmpi-dev libpfm4 libpfm4-dev ndctl daxctl e2fsprogs xfsprogs util-linux
 
 echo "Done installing user packages."

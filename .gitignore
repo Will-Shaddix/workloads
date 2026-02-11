@@ -5,4 +5,5 @@
 *bin*
 __pycache__
 modules/*/files
-
+*/disk-image
+modules/old
