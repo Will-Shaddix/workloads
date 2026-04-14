@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "annotate.h"
-#include "annotate.h"
 
 #ifdef ROI_PER_ITERATION
 #define ROI_BEGIN() roi_begin_()
