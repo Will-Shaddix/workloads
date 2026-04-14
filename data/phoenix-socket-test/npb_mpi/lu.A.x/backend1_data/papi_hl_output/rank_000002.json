@@ -1,0 +1,32 @@
+{
+  "papi_version":"7.0.1.0",
+  "cpu_info":"AMD EPYC 9354 32-Core Processor",
+  "max_cpu_rate_mhz":"3799",
+  "min_cpu_rate_mhz":"1500",
+  "event_definitions":{
+    "PAPI_TOT_CYC":{
+      "component":"perf_event",
+      "type":"delta"
+    }
+  },
+  "threads":{
+    "0":{
+      "regions":{
+        "0":{
+          "name":"roi",
+          "parent_region_id":"-1",
+          "cycles":"58358138",
+          "real_time_nsec":"17980094",
+          "PAPI_TOT_CYC":"67599513"
+        },
+        "1":{
+          "name":"roi",
+          "parent_region_id":"-1",
+          "cycles":"14643739630",
+          "real_time_nsec":"4512563658",
+          "PAPI_TOT_CYC":"16986154299"
+        }
+      }
+    }
+  }
+}

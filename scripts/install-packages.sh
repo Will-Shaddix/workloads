@@ -40,4 +40,9 @@ update-alternatives --set cpp /usr/bin/cpp-13
 # Install desired packages
 sudo apt-get -y -o Dpkg::Options::="--force-confnew" install python3-pip gfortran cmake openmpi-bin libopenmpi-dev libpfm4 libpfm4-dev ndctl daxctl e2fsprogs xfsprogs util-linux
 
+sudo apt-get -y -o Dpkg::Options::="--force-confnew" ubuntu-dbgsym-keyring
+
+sudo apt-get -y update 
+sudo apt-get -y -o Dpkg::Options::="--force-confnew" libopenmpi3-dbgsym openmpi-bin-dbgsym
+
 echo "Done installing user packages."

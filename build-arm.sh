@@ -30,7 +30,7 @@ if [[ "$ubuntu_version" != "22.04" && "$ubuntu_version" != "24.04" ]]; then
 fi
 
 # Store the image name from the second command line argument or default to "arm-ubuntu"
-image_name="${2:-arm-ubuntu-dax-support-with-output}"
+image_name="${2:-arm-ubuntu-dax-support-mpi-tests}"
 
 # make the flash0.img file
 cd ./files
