@@ -1,0 +1,254 @@
+Starting MPI test suite with 4 processes...
+=============================================
+
+=============================================
+▶ RUNNING TEST: mpi_test_send (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 0 (Send): final received 309
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 1 (Send): final received 9
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 2 (Send): final received 109
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 3 (Send): final received 209
+✔ mpi_test_send completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_isend (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+MPI_Init success
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+MPI Rank and Size = 1, 4 success
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 3 (Isend): final received 209
+Reached the end of roi region.
+Rank 1 (Isend): final received 9
+Reached the end of roi region.
+Rank 2 (Isend): final received 109
+Reached the end of roi region.
+Rank 0 (Isend): final received 309
+✔ mpi_test_isend completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_ssend (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 1 (Ssend): final received 9
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 2 (Ssend): final received 109
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 3 (Ssend): final received 209
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 0 (Ssend): final received 309
+✔ mpi_test_ssend completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_bcast (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+Reached the beginning of roi region.
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Reached the end of roi region.
+Reached the end of roi region.
+Rank 0 (Bcast): final received 9 from Rank 0
+Reached the end of roi region.
+Rank 3 (Bcast): final received 1373439216 from Rank 0
+Rank 1 (Bcast): final received 542704768 from Rank 0
+Rank 2 (Bcast): final received 64377536 from Rank 0
+✔ mpi_test_bcast completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_send_alt (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 3 (Send_Alt): final received 208
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 0 (Send_Alt): final received 309
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 1 (Send_Alt): final received 8
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 2 (Send_Alt): final received 109
+✔ mpi_test_send_alt completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_isend_alt (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 0 (Isend_Alt): final received 309
+Reached the end of roi region.
+Rank 2 (Isend_Alt): final received 109
+Reached the end of roi region.
+Rank 3 (Isend_Alt): final received 208
+Reached the end of roi region.
+Rank 1 (Isend_Alt): final received 8
+✔ mpi_test_isend_alt completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_ssend_alt (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 0 (Ssend_Alt): final received 309
+Reached the end of roi region.
+Rank 2 (Ssend_Alt): final received 109
+Reached the end of roi region.
+Rank 1 (Ssend_Alt): final received 8
+Reached the end of roi region.
+Rank 3 (Ssend_Alt): final received 208
+✔ mpi_test_ssend_alt completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_allgather (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 3 (Allgather): final received Rank 0's value 9
+Reached the end of roi region.
+Rank 2 (Allgather): final received Rank 0's value 9
+Reached the end of roi region.
+Rank 0 (Allgather): final received Rank 0's value 9
+Reached the end of roi region.
+Rank 1 (Allgather): final received Rank 0's value 9
+✔ mpi_test_allgather completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_groupsend (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 3 (GroupSend): final received at index 0 1179251280
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 0 (GroupSend): final received at index 0 9
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 1 (GroupSend): final received at index 0 -1048499392
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 2 (GroupSend): final received at index 0 -233147424
+✔ mpi_test_groupsend completed successfully.
+
+=============================================
+▶ RUNNING TEST: mpi_test_isendall (NP=4, LOOPS=10)
+=============================================
+MPI_Init success
+MPI Rank and Size = 3, 4 success
+MPI_Init success
+MPI Rank and Size = 0, 4 success
+MPI_Init success
+MPI Rank and Size = 1, 4 success
+MPI_Init success
+MPI Rank and Size = 2, 4 success
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the beginning of roi region.
+Reached the end of roi region.
+Rank 1 (IsendAll): final received at index 0 9
+Reached the end of roi region.
+Rank 3 (IsendAll): final received at index 0 9
+Reached the end of roi region.
+Rank 0 (IsendAll): final received at index 0 9
+Reached the end of roi region.
+Rank 2 (IsendAll): final received at index 0 9
+✔ mpi_test_isendall completed successfully.
+
+All tests finished. Check mpi_test_results.log for details.

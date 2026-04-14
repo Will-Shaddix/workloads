@@ -18,11 +18,15 @@ endif
 # --- MPI Example Section ---
 CC_MPI     = mpicc
 CFLAGS_MPI = -O2 -Wall -Wextra
+ifeq ($(PLATFORM), gem5)
+CFLAGS_MPI += -DGEM5
+endif
+ifdef ROI_PER_ITERATION
+CFLAGS_MPI += -DROI_PER_ITERATION
+endif
 LDFLAGS_MPI =
-TARGET_MPI = mpi_test
-SRCS_MPI   = mpi_test.c
-OBJS_MPI   = $(SRCS_MPI:.c=.o)
-
+TARGETS_MPI = mpi_test_all mpi_test_send mpi_test_isend mpi_test_ssend mpi_test_bcast mpi_test_send_alt mpi_test_isend_alt mpi_test_ssend_alt mpi_test_allgather mpi_test_groupsend mpi_test_isendall mpi_test_isend_fill
+# mpi_test
 CFLAGS_MPI += $(ROI_INC)
 
 # --- mmap Hook Section ---
@@ -34,19 +38,19 @@ TEST_MMAP    = test_mmap
 
 .PHONY: all gem5 run mmap run_mmap clean
 
-# --- Default rule builds only the MPI program ---
-all: $(TARGET_MPI)
+# --- Default rule builds both MPI and mmap programs ---
+all: $(TARGETS_MPI) mmap
 
 # --- MPI Build Rules ---
-$(TARGET_MPI): $(OBJS_MPI)
-	$(CC_MPI) $(CFLAGS_MPI) -o $@ $^ $(LDFLAGS_MPI) $(ROI_LIB) $(ROI_OBJ)
+$(TARGETS_MPI): %: %.o
+	$(CC_MPI) $(CFLAGS_MPI) -o $@ $^ $(LDFLAGS_MPI) $(ROI_LIB) $(ROI_OBJ) $(ROI_BIN)
 
 %.o: %.c
 	$(CC_MPI) $(CFLAGS_MPI) -c $< -o $@
 
 # --- gem5 build target (re-evaluates ifeq by running a sub-make) ---
 gem5:
-	$(MAKE) -B PLATFORM=gem5 $(TARGET_MPI)
+	$(MAKE) -B PLATFORM=gem5 all
 
 # --- mmap Hook and Test Rules ---
 mmap_overload.o: mmap_overload.c
@@ -61,14 +65,14 @@ $(TEST_MMAP): test_mmap.c
 mmap: $(TARGET_MMAP) $(TEST_MMAP)
 
 # --- Run targets ---
-run: $(TARGET_MPI)
-	mpirun -np 2 ./$(TARGET_MPI)
+run: $(TARGETS_MPI)
+	mpirun -np 2 ./mpi_test
 
 run_mmap: mmap
 	LD_PRELOAD=$(PWD)/libmmaphook.so ./$(TEST_MMAP)
 
 # --- Cleanup ---
 clean:
-	rm -f $(TARGET_MPI) $(OBJS_MPI) \
-	      $(TARGET_MMAP) mmap_overload.o \
+	rm -f $(TARGETS_MPI) *.o \
+	      $(TARGET_MMAP) \
 	      $(TEST_MMAP)

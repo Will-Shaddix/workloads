@@ -29,7 +29,9 @@ int main(int argc, char** argv) {
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
-    m5_checkpoint(0, 0);
+    if (rank == 0) {
+        m5_checkpoint(0, 0);
+    }
 
     int peer = 1 - rank;
 
@@ -62,12 +64,16 @@ int main(int argc, char** argv) {
 
     MPI_Waitall(2, reqs, MPI_STATUSES_IGNORE);
     // m5_workend();
-    m5_exit(0);
+    
 
     printf("Rank %d (async): received %d\n", rank, recv_async);
     fflush(stdout);
-    m5_exit(0);
+    if (rank == 0) {
+        m5_exit(0);
+    }
 
     MPI_Finalize();
+    
+
     return 0;
 }

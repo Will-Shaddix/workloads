@@ -31,6 +31,14 @@
 #include <unistd.h>
 #include <pthread.h>
 
+#ifndef MAP_SHARED_VALIDATE
+#define MAP_SHARED_VALIDATE 0x03
+#endif
+
+#ifndef MAP_SYNC
+#define MAP_SYNC 0x080000
+#endif
+
 /* forward decls for local logging used by helpers defined later */
 static void slog(const char *s);
 
@@ -460,7 +468,7 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
         return real_mmap_fn(addr,length,prot,flags,fd,offset);
     }
 
-    int tfd=open(data_path,O_RDWR|O_CREAT,0666);
+    int tfd=open(data_path,O_RDWR|O_CREAT|O_SYNC,0666);
     if(tfd<0){
         slog2("WARN: open target failed; using original shm map",data_path);
         return real_mmap_fn(addr,length,prot,flags,fd,offset);
@@ -471,8 +479,11 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
         return real_mmap_fn(addr,length,prot,flags,fd,offset);
     }
 
-    slog2("Attempting mmap redirect to fsdax",data_path);
-    void* p=real_mmap_fn(addr,length,prot,(flags|MAP_SHARED)&~MAP_ANONYMOUS,tfd,0);
+    slog2("Attempting mmap redirect to fsdax (MAP_SYNC)",data_path);
+    // Use MAP_SHARED_VALIDATE + MAP_SYNC to ensure DAX sync
+    void* p=real_mmap_fn(addr,length,prot,
+                         (flags & ~(MAP_SHARED|MAP_PRIVATE|MAP_ANONYMOUS)) | MAP_SHARED_VALIDATE | MAP_SYNC,
+                         tfd,0);
     if(p==MAP_FAILED){
         slog2("WARN: mmap target failed; using original shm map",data_path);
         close(tfd);
