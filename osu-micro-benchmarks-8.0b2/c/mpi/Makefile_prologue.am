@@ -1,0 +1,49 @@
+AM_CPPFLAGS = \
+    -I$(abs_top_srcdir)/c/util \
+    -I$(abs_top_builddir)/c/util
+
+NVCC = @NVCC@
+NVCFLAGS = -cuda -maxrregcount 32 -ccbin $(CXX) $(NVCCFLAGS)
+SUFFIXES = .cu .cpp
+.cu.cpp:
+	$(NVCC) $(NVCFLAGS) $(INCLUDES) $(CPPFLAGS) --output-file $@.ii $<
+	mv $@.ii $@
+
+UTILITIES = \
+    $(top_srcdir)/c/util/omb_general_util.c $(top_srcdir)/c/util/omb_general_util.h \
+    $(top_srcdir)/c/util/omb_color.c        $(top_srcdir)/c/util/omb_color.h \
+    $(top_srcdir)/c/util/osu_util.c         $(top_srcdir)/c/util/osu_util.h \
+    $(top_srcdir)/c/util/osu_util_mpi.c     $(top_srcdir)/c/util/osu_util_mpi.h \
+    $(top_srcdir)/c/util/osu_util_graph.c   $(top_srcdir)/c/util/osu_util_graph.h \
+    $(top_srcdir)/c/util/osu_util_papi.c    $(top_srcdir)/c/util/osu_util_papi.h \
+    $(top_srcdir)/c/util/osu_util_validation.c
+
+
+if CUDA_KERNELS
+UTILITIES += $(top_srcdir)/c/util/kernel.cu
+CLEANFILES = $(top_srcdir)/c/util/kernel.cpp
+if BUILD_USE_PGI
+AM_CXXFLAGS = --nvcchost --no_preincludes
+endif
+endif
+
+if SYCL
+UTILITIES += $(top_srcdir)/c/util/osu_util_sycl.cpp $(top_srcdir)/c/util/osu_util_sycl.hpp
+endif
+
+
+if EMBEDDED_BUILD
+    AM_LDFLAGS =
+    AM_CPPFLAGS += -I$(top_builddir)/../src/include \
+          -I${top_srcdir}/util \
+		  -I${top_srcdir}/../src/include
+if BUILD_PROFILING_LIB
+    AM_LDFLAGS += $(top_builddir)/../lib/lib@PMPILIBNAME@.la
+endif
+    AM_LDFLAGS += $(top_builddir)/../lib/lib@MPILIBNAME@.la
+endif
+
+if OPENACC
+    AM_CFLAGS = -acc -ta=tesla:nordc
+    AM_CXXFLAGS = -acc -ta=tesla:nordc
+endif
